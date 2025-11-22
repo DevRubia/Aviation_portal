@@ -50,7 +50,7 @@ export default function ApplicationForm() {
       
       toast.success('Application submitted successfully!', {
         duration: 4000,
-        icon: '✈️',
+        icon: <FileText className="h-6 w-6" />,
       });
       
       navigate('/dashboard', { state: { activeTab: 'submissions' } });

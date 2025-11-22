@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@theme {
+    --color-aviation-50: #f0f9ff;
+    --color-aviation-100: #e0f2fe;
+    --color-aviation-500: #0ea5e9;
+    --color-aviation-600: #0284c7;
+    --color-aviation-900: #0c4a6e;
+}

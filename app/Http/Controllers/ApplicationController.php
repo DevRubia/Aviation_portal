@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Log;
 
 class ApplicationController extends Controller
 {
+    public function index()
+    {
+        $applications = LicenceApplication::latest()->get();
+        return response()->json($applications);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

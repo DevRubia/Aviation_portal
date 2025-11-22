@@ -1,46 +1,11 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { BookOpen, CheckCircle, ArrowRight, AlertTriangle } from 'lucide-react';
+import { guidelines } from '../data/guidelines';
 
 export default function ApplicationGuideline() {
   const { type } = useParams();
   const licenseType = type?.toUpperCase();
-
-  const guidelines = {
-    SPL: {
-      title: 'Student Pilot License',
-      requirements: [
-        'Must be at least 16 years of age.',
-        'Class 2 Medical Certificate.',
-        'English Language Proficiency.',
-        'Security Clearance.',
-      ],
-      description: 'The SPL is the first step in your pilot training. It allows you to fly solo under the supervision of a flight instructor.',
-    },
-    PPL: {
-      title: 'Private Pilot License',
-      requirements: [
-        'Must be at least 17 years of age.',
-        'Valid SPL.',
-        'Minimum 40 hours of flight time.',
-        'Pass theoretical knowledge exams.',
-        'Pass practical flight test.',
-      ],
-      description: 'The PPL allows you to fly private aircraft for non-commercial purposes. You can carry passengers but cannot be paid for flying.',
-    },
-    CPL: {
-      title: 'Commercial Pilot License',
-      requirements: [
-        'Must be at least 18 years of age.',
-        'Valid PPL.',
-        'Minimum 200 hours of flight time.',
-        'Class 1 Medical Certificate.',
-        'Pass CPL theoretical exams.',
-        'Pass CPL flight test.',
-      ],
-      description: 'The CPL allows you to fly for compensation or hire. It is required for a career as a professional pilot.',
-    },
-  };
 
   const currentGuideline = guidelines[licenseType] || {
     title: `${licenseType} License`,

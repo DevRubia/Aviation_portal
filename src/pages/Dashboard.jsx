@@ -1,6 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FileBadge, Award, BookOpen, Layers, CheckCircle, FileText, Eye, Trash2 } from 'lucide-react';
+import { FileBadge, Award, BookOpen, Layers, CheckCircle, FileText, Eye, Trash2, Plane, GraduationCap, Shield, Users, FileCheck, Globe } from 'lucide-react';
+import { guidelines } from '../data/guidelines';
+
+// Icon mapping for different license types
+const iconMap = {
+  SPL: BookOpen,
+  PPL: FileBadge,
+  CPL: Award,
+  ATPL: Plane,
+  IR: Shield,
+  MER: Plane,
+  NightRating: Plane,
+  FI: GraduationCap,
+  CCL: Users,
+  Dispatcher: FileCheck,
+  MedicalCertificates: FileCheck,
+  ELP: Globe,
+};
 
 const LicenseCard = ({ title, description, icon: Icon, to }) => (
   <Link to={to} className="group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-slate-200 p-6 hover:border-aviation-300 hover:shadow-lg transition-all duration-300">
@@ -159,24 +176,15 @@ export default function Dashboard() {
         <div className="transition-all duration-300 ease-in-out">
           {activeTab === 'services' && (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <LicenseCard
-                title="Student Pilot License (SPL)"
-                description="Begin your aviation journey. Apply for your initial student pilot license to start training."
-                icon={BookOpen}
-                to="/guidelines/spl"
-              />
-              <LicenseCard
-                title="Private Pilot License (PPL)"
-                description="Fly for leisure. Apply for a PPL to fly private aircraft for non-commercial purposes."
-                icon={FileBadge}
-                to="/guidelines/ppl"
-              />
-              <LicenseCard
-                title="Commercial Pilot License (CPL)"
-                description="Turn your passion into a career. Apply for a CPL to fly professionally."
-                icon={Award}
-                to="/guidelines/cpl"
-              />
+              {Object.entries(guidelines).map(([key, guideline]) => (
+                <LicenseCard
+                  key={key}
+                  title={guideline.title}
+                  description={guideline.description}
+                  icon={iconMap[key] || FileText}
+                  to={`/guidelines/${key.toLowerCase()}`}
+                />
+              ))}
             </div>
           )}
 

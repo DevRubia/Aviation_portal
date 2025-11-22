@@ -14,8 +14,8 @@ export default function ApplicationGuideline() {
   };
 
   return (
-    <div className="min-h-full bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+    <div className="min-h-full bg-slate-50 py-6 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
         <div className="bg-aviation-600 px-8 py-8 text-white">
           <div className="flex items-center gap-3">
             <BookOpen className="h-8 w-8" />

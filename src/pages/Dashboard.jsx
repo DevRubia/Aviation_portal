@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FileBadge, Award, BookOpen, Layers, CheckCircle, FileText, Eye, Trash2, Plane, GraduationCap, Shield, Users, FileCheck, Globe } from 'lucide-react';
+import { FileBadge, Award, BookOpen, Layers, CheckCircle, FileText, Eye, Trash2, Plane, GraduationCap, Shield, Users, FileCheck, Globe, AlertCircle } from 'lucide-react';
 import { guidelines } from '../data/guidelines';
 
 // Icon mapping for different license types
@@ -35,16 +35,33 @@ const LicenseCard = ({ title, description, icon: Icon, to }) => (
 const ApplicationsTable = () => {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchApplications = () => {
+    setLoading(true);
+    setError(null);
     fetch('/api/applications')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then(data => {
-        setApplications(data);
+        console.log('Fetched applications:', data);
+        if (Array.isArray(data)) {
+          setApplications(data);
+        } else {
+          console.error('API response is not an array:', data);
+          setApplications([]);
+          setError('Received invalid data from server.');
+        }
         setLoading(false);
       })
       .catch(err => {
         console.error('Failed to fetch applications', err);
+        setApplications([]);
+        setError(err.message || 'Failed to load applications.');
         setLoading(false);
       });
   };
@@ -55,12 +72,34 @@ const ApplicationsTable = () => {
 
   if (loading) return <div className="text-center py-10 text-slate-500">Loading submissions...</div>;
 
+  if (error) {
+    return (
+      <div className="text-center py-16 bg-red-50 rounded-2xl border border-red-200 border-dashed">
+        <AlertCircle className="mx-auto h-12 w-12 text-red-400" />
+        <h3 className="mt-2 text-sm font-semibold text-red-900">Error loading applications</h3>
+        <p className="mt-1 text-sm text-red-700">{error}</p>
+        <button 
+          onClick={fetchApplications}
+          className="mt-4 px-4 py-2 bg-white border border-red-300 rounded-md text-sm font-medium text-red-700 hover:bg-red-50 transition-colors"
+        >
+          Try Again
+        </button>
+      </div>
+    );
+  }
+
   if (applications.length === 0) {
     return (
       <div className="text-center py-16 bg-white rounded-2xl border border-slate-200 border-dashed">
         <FileText className="mx-auto h-12 w-12 text-slate-300" />
         <h3 className="mt-2 text-sm font-semibold text-slate-900">No applications found</h3>
         <p className="mt-1 text-sm text-slate-500">Get started by selecting a service from the Services tab.</p>
+        <button 
+          onClick={fetchApplications}
+          className="mt-4 px-4 py-2 text-aviation-600 hover:text-aviation-700 text-sm font-medium"
+        >
+          Refresh
+        </button>
       </div>
     );
   }

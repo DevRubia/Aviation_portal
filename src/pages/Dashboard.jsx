@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FileBadge, Award, BookOpen, Layers, CheckCircle, FileText, Eye, Trash2 } from 'lucide-react';
 
 const LicenseCard = ({ title, description, icon: Icon, to }) => (
@@ -19,7 +19,7 @@ const ApplicationsTable = () => {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchApplications = () => {
     fetch('/api/applications')
       .then(res => res.json())
       .then(data => {
@@ -30,6 +30,10 @@ const ApplicationsTable = () => {
         console.error('Failed to fetch applications', err);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchApplications();
   }, []);
 
   if (loading) return <div className="text-center py-10 text-slate-500">Loading submissions...</div>;
@@ -99,7 +103,14 @@ const ApplicationsTable = () => {
 };
 
 export default function Dashboard() {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState('services');
+
+  useEffect(() => {
+    if (location.state?.activeTab) {
+      setActiveTab(location.state.activeTab);
+    }
+  }, [location]);
 
   const tabs = [
     { id: 'services', label: 'Services', icon: Layers },

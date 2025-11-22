@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { FileText, Upload, CheckCircle, AlertCircle } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { FileText, AlertCircle } from 'lucide-react';
 
 export default function ApplicationForm() {
   const { type } = useParams();
@@ -14,7 +15,6 @@ export default function ApplicationForm() {
     medicalCert: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,7 +23,6 @@ export default function ApplicationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError(null);
 
     try {
       const response = await fetch('/api/applications', {
@@ -48,10 +47,16 @@ export default function ApplicationForm() {
 
       const data = await response.json();
       console.log('Submission successful:', data);
-      navigate('/success');
+      
+      toast.success('Application submitted successfully!', {
+        duration: 4000,
+        icon: '✈️',
+      });
+      
+      navigate('/dashboard', { state: { activeTab: 'submissions' } });
     } catch (err) {
       console.error(err);
-      setError('Failed to submit application. Please try again.');
+      toast.error('Failed to submit application. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -70,13 +75,6 @@ export default function ApplicationForm() {
           </div>
 
           <form onSubmit={handleSubmit} className="px-8 py-8 space-y-6">
-            {error && (
-              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-md flex items-center gap-3">
-                <AlertCircle className="h-5 w-5 text-red-500" />
-                <p className="text-red-700 text-sm">{error}</p>
-              </div>
-            )}
-
             <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
               <div className="sm:col-span-2">
                 <label htmlFor="fullName" className="block text-sm font-medium text-slate-700">Full Name</label>

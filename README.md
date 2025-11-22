@@ -33,7 +33,6 @@ Ensure you have the following installed on your machine:
     -   Open `.env` and configure your database settings. For example, if using Psql.
         ```ini
         DB_CONNECTION=postgres
-        # DB_HOST, DB_PORT, etc. can be removed or ignored for sqlite
         ```
 
 4.  **Generate Application Key:**

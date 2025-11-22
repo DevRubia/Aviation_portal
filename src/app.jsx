@@ -24,6 +24,8 @@ function App() {
           <Route path="notifications" element={<Notifications />} />
           <Route path="guidelines/:type" element={<ApplicationGuideline />} />
           <Route path="apply/:type" element={<ApplicationForm />} />
+          <Route path="application/:id/edit" element={<ApplicationForm />} />
+          <Route path="application/:id/view" element={<ApplicationForm readOnly={true} />} />
         </Route>
       </Routes>
     </BrowserRouter>

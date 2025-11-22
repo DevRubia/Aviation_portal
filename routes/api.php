@@ -10,3 +10,5 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/applications', [ApplicationController::class, 'store']);
 Route::get('/applications', [ApplicationController::class, 'index']);
+Route::get('/applications/{id}', [ApplicationController::class, 'show']);
+Route::put('/applications/{id}', [ApplicationController::class, 'update']);

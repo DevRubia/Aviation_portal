@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FileBadge, Award, BookOpen, Layers, CheckCircle, FileText, Eye, Trash2, Plane, GraduationCap, Shield, Users, FileCheck, Globe, AlertCircle } from 'lucide-react';
+import { FileBadge, Award, BookOpen, Layers, CheckCircle, FileText, Eye, Trash2, Plane, GraduationCap, Shield, Users, FileCheck, Globe, AlertCircle, Edit } from 'lucide-react';
 import { guidelines } from '../data/guidelines';
 
 // Icon mapping for different license types
@@ -145,8 +145,13 @@ const ApplicationsTable = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <div className="flex items-center justify-end gap-2">
-                    <button className="text-slate-400 hover:text-aviation-600 transition-colors"><Eye className="h-4 w-4" /></button>
-                    <button className="text-slate-400 hover:text-red-600 transition-colors"><Trash2 className="h-4 w-4" /></button>
+                    <Link to={`/application/${app.id}/view`} className="text-slate-400 hover:text-aviation-600 transition-colors" title="View">
+                      <Eye className="h-4 w-4" />
+                    </Link>
+                    <Link to={`/application/${app.id}/edit`} className="text-slate-400 hover:text-aviation-600 transition-colors" title="Edit">
+                      <Edit className="h-4 w-4" />
+                    </Link>
+                    <button className="text-slate-400 hover:text-red-600 transition-colors" title="Delete"><Trash2 className="h-4 w-4" /></button>
                   </div>
                 </td>
               </tr>

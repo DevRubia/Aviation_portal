@@ -36,4 +36,32 @@ class ApplicationController extends Controller
             'application_id' => $application->id,
         ], 201);
     }
+
+    public function show($id)
+    {
+        $application = LicenceApplication::findOrFail($id);
+        return response()->json($application);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $application = LicenceApplication::findOrFail($id);
+
+        $validated = $request->validate([
+            'payload' => 'required|array',
+            'applicant_details' => 'sometimes|array',
+        ]);
+
+        $application->update([
+            'payload' => $validated['payload'],
+            'applicant_details' => $validated['applicant_details'] ?? $application->applicant_details,
+        ]);
+
+        Log::info('Application Updated', ['id' => $application->id]);
+
+        return response()->json([
+            'message' => 'Application updated successfully',
+            'application' => $application,
+        ]);
+    }
 }

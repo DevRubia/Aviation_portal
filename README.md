@@ -30,17 +30,10 @@ Ensure you have the following installed on your machine:
         ```bash
         cp .env.example .env
         ```
-    -   Open `.env` and configure your database settings. For example, if using SQLite (simplest for dev):
+    -   Open `.env` and configure your database settings. For example, if using Psql.
         ```ini
-        DB_CONNECTION=sqlite
+        DB_CONNECTION=postgres
         # DB_HOST, DB_PORT, etc. can be removed or ignored for sqlite
-        ```
-    -   If using SQLite, create the database file:
-        ```bash
-        # Windows (PowerShell)
-        New-Item -ItemType File database/database.sqlite
-        # Linux/Mac
-        touch database/database.sqlite
         ```
 
 4.  **Generate Application Key:**
@@ -83,27 +76,10 @@ Ensure you have the following installed on your machine:
 
 -   **Backend (`/app`, `/routes`, `/database`)**: Handles API requests, database interactions, and business logic.
     -   `routes/api.php`: API route definitions.
-    -   `app/Http/Controllers/ApplicationController.php`: Main controller for license applications.
 -   **Frontend (`/src`)**: React application.
     -   `src/app.jsx`: Main entry point and routing.
     -   `src/pages/`: Page components (Dashboard, ApplicationForm, etc.).
     -   `src/components/`: Reusable UI components (Layout, etc.).
-
-## 4. Common Troubleshooting
-
-### API Connection Issues
--   **Problem**: Frontend says "Failed to fetch" or shows network errors.
--   **Solution**: Ensure the Laravel server is running on port `8000`. The Vite config (`vite.config.js`) is set up to proxy `/api` requests to `http://127.0.0.1:8000`.
-
-### Database Errors
--   **Problem**: "SQLSTATE[HY000] [2002] Connection refused"
--   **Solution**: Verify your `.env` database credentials. If using MySQL, ensure the service is running. If using SQLite, ensure the absolute path in `DB_DATABASE` is correct (or just use `database/database.sqlite` if configured properly).
-
-### Missing Styles
--   **Problem**: Tailwind classes not applying.
--   **Solution**: Ensure `npm run dev` is running, as it compiles the CSS on the fly.
-
----
 
 ## 5. Development Workflow
 
@@ -111,4 +87,3 @@ Ensure you have the following installed on your machine:
 2.  Start Frontend: `npm run dev`
 3.  Access App: `http://localhost:5173`
 
-Happy Coding! ✈️

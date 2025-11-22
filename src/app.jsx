@@ -9,6 +9,8 @@ import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import ApplicationGuideline from './pages/ApplicationGuideline';
 import ApplicationForm from './pages/ApplicationForm';
+import Profile from './pages/Profile';
+import Notifications from './pages/Notifications';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Landing />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="notifications" element={<Notifications />} />
           <Route path="guidelines/:type" element={<ApplicationGuideline />} />
           <Route path="apply/:type" element={<ApplicationForm />} />
         </Route>

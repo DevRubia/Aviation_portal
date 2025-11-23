@@ -135,6 +135,7 @@ const ApplicationsTable = () => {
                   <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                     app.status === 'approved' ? 'bg-green-100 text-green-800' : 
                     app.status === 'rejected' ? 'bg-red-100 text-red-800' : 
+                    app.status === 'open' ? 'bg-slate-100 text-slate-800' :
                     'bg-yellow-100 text-yellow-800'
                   }`}>
                     {app.status.charAt(0).toUpperCase() + app.status.slice(1)}

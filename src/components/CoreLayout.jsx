@@ -4,8 +4,10 @@ import { ShieldCheck, Home, FileText, Bell, User, Menu, X, LogOut } from 'lucide
 
 export default function CoreLayout() {
     const location = useLocation();
+    // State to manage mobile sidebar visibility
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
+    // Navigation items configuration
     const navigation = [
         { name: 'Home', href: '/core/dashboard', icon: Home },
         { name: 'Registry', href: '/core/registry', icon: FileText },

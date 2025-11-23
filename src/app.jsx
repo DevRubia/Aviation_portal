@@ -26,10 +26,10 @@ function App() {
     <BrowserRouter>
       <Toaster position="top-right" />
       <Routes>
-        {/* Gateway Route */}
+        {/* Gateway Route - Entry point for the application */}
         <Route path="/" element={<Gateway />} />
 
-        {/* Portal Routes */}
+        {/* Portal Routes - Public facing pilot portal */}
         <Route path="/portal" element={<Layout />}>
           <Route index element={<Landing />} />
           <Route path="login" element={<PortalLogin />} />
@@ -42,9 +42,10 @@ function App() {
           <Route path="application/:id/view" element={<ApplicationForm readOnly={true} />} />
         </Route>
 
-        {/* Admin Route Placeholder */}
+        {/* Admin Routes - Internal Core System */}
         <Route path="/core/login" element={<AdminLogin />} />
 
+        {/* Protected Core Routes */}
         <Route path="/core" element={<CoreLayout />}>
           <Route index element={<Navigate to="/core/dashboard" replace />} />
           <Route path="dashboard" element={<CoreDashboard />} />

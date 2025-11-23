@@ -21,14 +21,22 @@ import toast from 'react-hot-toast';
 export default function ApplicationDetail() {
     const { id } = useParams();
     const navigate = useNavigate();
+
+    // State for application data
     const [application, setApplication] = useState(null);
+    // State for loading status
     const [loading, setLoading] = useState(true);
+    // State for action button loading status
     const [actionLoading, setActionLoading] = useState(false);
 
+    // Fetch application data on component mount
     useEffect(() => {
         fetchApplication();
     }, [id]);
 
+    /**
+     * Fetches the application details from the API.
+     */
     const fetchApplication = async () => {
         setLoading(true);
         try {
@@ -43,6 +51,10 @@ export default function ApplicationDetail() {
         }
     };
 
+    /**
+     * Handles the approval or rejection of an application.
+     * @param {string} action - 'approved' or 'rejected'
+     */
     const handleAction = async (action) => {
         setActionLoading(true);
         try {
@@ -79,6 +91,11 @@ export default function ApplicationDetail() {
     const details = typeof applicant_details === 'string' ? JSON.parse(applicant_details) : applicant_details;
     const formData = typeof payload === 'string' ? JSON.parse(payload) : payload;
 
+    /**
+     * Returns the appropriate badge styles and icon for a given status.
+     * @param {string} status - The status of the application.
+     * @returns {object} - Object containing color classes and icon component.
+     */
     const getStatusBadge = (status) => {
         const s = status?.toLowerCase();
         if (s === 'approved') return { color: 'bg-green-100 text-green-800 border-green-200', icon: CheckCircle };

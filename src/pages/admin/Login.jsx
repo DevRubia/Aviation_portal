@@ -7,16 +7,20 @@ import Card from '../../components/ui/Card';
 
 export default function AdminLogin() {
   const navigate = useNavigate();
+  // State for login form data
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  // State for loading status
   const [isLoading, setIsLoading] = useState(false);
 
+  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);

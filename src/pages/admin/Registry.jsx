@@ -5,18 +5,24 @@ import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 
 export default function Registry() {
+    // State for search input
     const [searchTerm, setSearchTerm] = useState('');
+    // State for storing application data
     const [applications, setApplications] = useState([]);
+    // State for loading status
     const [isLoading, setIsLoading] = useState(true);
+    // State for tracking which dropdown is open
     const [openDropdown, setOpenDropdown] = useState(null);
+
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
 
+    // Initial data fetch
     useEffect(() => {
         fetchApplications();
     }, []);
 
-    // Close dropdown when clicking outside
+    // Handle clicking outside of dropdown to close it
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -28,6 +34,9 @@ export default function Registry() {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
+    /**
+     * Fetches all applications from the API.
+     */
     const fetchApplications = async () => {
         setIsLoading(true);
         try {
@@ -40,6 +49,11 @@ export default function Registry() {
         }
     };
 
+    /**
+     * Returns the appropriate Tailwind CSS classes for a given status.
+     * @param {string} status - The status of the application.
+     * @returns {string} - Tailwind CSS classes.
+     */
     const getStatusColor = (status) => {
         const s = status?.toLowerCase();
         if (s === 'approved') return 'text-green-600 bg-green-50 border-green-100';
@@ -49,6 +63,11 @@ export default function Registry() {
         return 'text-amber-600 bg-amber-50 border-amber-100';
     };
 
+    /**
+     * Calculates the number of days an application has been in its current stage.
+     * @param {string} dateString - The date string to calculate from.
+     * @returns {string} - The number of days.
+     */
     const calculateTimeInStage = (dateString) => {
         if (!dateString) return '--';
         const date = new Date(dateString);
@@ -58,6 +77,11 @@ export default function Registry() {
         return `${diffDays} days`;
     };
 
+    /**
+     * Extracts the applicant's name from the JSON details.
+     * @param {object} app - The application object.
+     * @returns {string} - The applicant's name.
+     */
     const getApplicantName = (app) => {
         if (!app.applicant_details) return 'Unknown';
         const details = typeof app.applicant_details === 'string'
@@ -67,6 +91,7 @@ export default function Registry() {
         return details.name || 'Unknown';
     };
 
+    // Filter applications based on search term
     const filteredApplications = applications.filter(app => {
         const searchLower = searchTerm.toLowerCase();
         const applicantName = getApplicantName(app).toLowerCase();
@@ -74,10 +99,19 @@ export default function Registry() {
         return applicantName.includes(searchLower) || ref.includes(searchLower);
     });
 
+    /**
+     * Toggles the visibility of the action dropdown for a specific row.
+     * @param {number} appId - The ID of the application.
+     */
     const toggleDropdown = (appId) => {
         setOpenDropdown(openDropdown === appId ? null : appId);
     };
 
+    /**
+     * Handles the navigation for view/edit actions.
+     * @param {string} action - 'view' or 'edit'
+     * @param {number} appId - The ID of the application.
+     */
     const handleAction = (action, appId) => {
         setOpenDropdown(null);
         if (action === 'view') {
@@ -85,7 +119,6 @@ export default function Registry() {
         } else if (action === 'edit') {
             navigate(`/portal/application/${appId}/edit`);
         }
-        // Add more actions here as needed
     };
 
     return (

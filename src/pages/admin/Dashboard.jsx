@@ -3,6 +3,8 @@ import { Users, FileText, CheckCircle, Clock } from 'lucide-react';
 import Card from '../../components/ui/Card';
 
 export default function CoreDashboard() {
+    // Mock statistics data
+    // TODO: Replace with actual API data
     const stats = [
         { name: 'Total Applications', value: '128', icon: FileText, color: 'bg-blue-500' },
         { name: 'Pending Review', value: '32', icon: Clock, color: 'bg-amber-500' },

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Plane, ShieldCheck, ArrowRight } from 'lucide-react';
+import Card from '../components/ui/Card';
 
 export default function Gateway() {
   return (
@@ -23,9 +24,11 @@ export default function Gateway() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 px-4 sm:px-0">
           
           {/* Pilot Portal Card */}
-          <Link 
+          <Card 
+            as={Link} 
             to="/portal" 
-            className="group relative bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-200 hover:border-aviation-500 transition-all duration-300 overflow-hidden"
+            hoverEffect={true}
+            className="group relative"
           >
             <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-aviation-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500"></div>
             
@@ -47,12 +50,14 @@ export default function Gateway() {
               </div>
             </div>
             <div className="h-1.5 w-full bg-aviation-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-          </Link>
+          </Card>
 
           {/* Admin Portal Card */}
-          <Link 
+          <Card 
+            as={Link} 
             to="/core" 
-            className="group relative bg-white rounded-2xl shadow-sm hover:shadow-xl border border-slate-200 hover:border-slate-400 transition-all duration-300 overflow-hidden"
+            hoverEffect={true}
+            className="group relative hover:border-slate-400"
           >
             <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-slate-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500"></div>
             
@@ -74,7 +79,7 @@ export default function Gateway() {
               </div>
             </div>
             <div className="h-1.5 w-full bg-slate-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-          </Link>
+          </Card>
 
         </div>
         

@@ -10,15 +10,25 @@ export default function Layout() {
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            <Link to="/" className="flex items-center gap-2 text-aviation-600 hover:text-aviation-700 transition-colors">
+            <Link to="/portal" className="flex items-center gap-2 text-aviation-600 hover:text-aviation-700 transition-colors">
               <Plane className="h-8 w-8" />
-              <span className="font-bold text-xl tracking-tight">SkyLicensing</span>
+              <span className="font-bold text-xl tracking-tight">SkyLicensing-SOFIA</span>
             </Link>
             
             <div className="flex items-center gap-6">
               <nav className="flex gap-6 mr-4">
-                <Link to="/" className={`font-medium transition-colors ${location.pathname === '/' ? 'text-aviation-600' : 'text-slate-600 hover:text-aviation-600'}`}>Home</Link>
-                <Link to="/dashboard" className={`font-medium transition-colors ${location.pathname === '/dashboard' ? 'text-aviation-600' : 'text-slate-600 hover:text-aviation-600'}`}>Dashboard</Link>
+                <Link 
+                  to="/portal" 
+                  className={`font-medium transition-colors ${location.pathname === '/portal' ? 'text-aviation-600' : 'text-slate-600 hover:text-aviation-600'}`}
+                >
+                  Home
+                </Link>
+                <Link 
+                  to="/portal/dashboard" 
+                  className={`font-medium transition-colors ${location.pathname.includes('/portal/dashboard') ? 'text-aviation-600' : 'text-slate-600 hover:text-aviation-600'}`}
+                >
+                  Dashboard
+                </Link>
               </nav>
 
               <div className="flex items-center gap-4 pl-6 border-l border-slate-200">

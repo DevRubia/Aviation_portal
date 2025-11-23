@@ -145,10 +145,10 @@ const ApplicationsTable = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <div className="flex items-center justify-end gap-2">
-                    <Link to={`/application/${app.id}/view`} className="text-slate-400 hover:text-aviation-600 transition-colors" title="View">
+                    <Link to={`/portal/application/${app.id}/view`} className="text-slate-400 hover:text-aviation-600 transition-colors" title="View">
                       <Eye className="h-4 w-4" />
                     </Link>
-                    <Link to={`/application/${app.id}/edit`} className="text-slate-400 hover:text-aviation-600 transition-colors" title="Edit">
+                    <Link to={`/portal/guidelines/${app.licence_type.toLowerCase()}`} className="text-aviation-600 hover:text-aviation-700 text-sm font-medium flex items-center gap-1" title="View Guideline">
                       <Edit className="h-4 w-4" />
                     </Link>
                     <button className="text-slate-400 hover:text-red-600 transition-colors" title="Delete"><Trash2 className="h-4 w-4" /></button>

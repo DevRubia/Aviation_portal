@@ -74,7 +74,7 @@ export default function ApplicationForm({ readOnly = false }) {
           console.error('Error fetching application:', err);
           toast.error('Failed to load application data');
           setLoading(false);
-          navigate('/dashboard');
+          navigate('/portal/dashboard');
         });
     }
   }, [id, navigate]);
@@ -123,7 +123,7 @@ export default function ApplicationForm({ readOnly = false }) {
         icon: <FileText className="h-6 w-6" />,
       });
       
-      navigate('/dashboard', { state: { activeTab: 'submissions' } });
+      navigate('/portal/dashboard', { state: { activeTab: 'submissions' } });
     } catch (err) {
       console.error('Submission error:', err);
       toast.error(`Failed to ${id ? 'update' : 'submit'}: ${err.message}`);

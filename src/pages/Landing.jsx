@@ -7,7 +7,7 @@ export default function Landing() {
 
   const handleLogin = () => {
     // Mock login - redirect to dashboard
-    navigate('/dashboard');
+    navigate('/portal/dashboard');
   };
 
   return (

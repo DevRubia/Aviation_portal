@@ -59,7 +59,7 @@ export default function ApplicationGuideline() {
               Cancel
             </Link>
             <Link
-              to={`/apply/${type}`}
+              to={`/portal/apply/${type}`}
               className="flex items-center gap-2 px-8 py-3 rounded-lg bg-aviation-600 text-white font-semibold hover:bg-aviation-700 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
             >
               Proceed to Application <ArrowRight className="h-5 w-5" />

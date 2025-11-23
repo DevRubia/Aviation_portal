@@ -12,7 +12,7 @@ export default function Layout() {
           <div className="flex justify-between h-16 items-center">
             <Link to="/portal" className="flex items-center gap-2 text-aviation-600 hover:text-aviation-700 transition-colors">
               <Plane className="h-8 w-8" />
-              <span className="font-bold text-xl tracking-tight">SkyLicensing-SOFIA</span>
+              <span className="font-bold text-xl tracking-tight">SkyLicensing Sofia-Portal</span>
             </Link>
             
             <div className="flex items-center gap-6">
@@ -32,12 +32,12 @@ export default function Layout() {
               </nav>
 
               <div className="flex items-center gap-4 pl-6 border-l border-slate-200">
-                <Link to="/notifications" className="relative text-slate-500 hover:text-aviation-600 transition-colors p-1">
+                <Link to="/portal/notifications" className="relative text-slate-500 hover:text-aviation-600 transition-colors p-1">
                   <Bell className="h-5 w-5" />
                   <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
                 </Link>
                 
-                <Link to="/profile" className="flex items-center gap-2 text-slate-700 hover:text-aviation-600 transition-colors group">
+                <Link to="/portal/profile" className="flex items-center gap-2 text-slate-700 hover:text-aviation-600 transition-colors group">
                   <div className="h-8 w-8 rounded-full bg-aviation-100 flex items-center justify-center text-aviation-700 group-hover:bg-aviation-200 transition-colors">
                     <User className="h-5 w-5" />
                   </div>

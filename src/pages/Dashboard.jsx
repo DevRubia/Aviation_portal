@@ -148,7 +148,7 @@ const ApplicationsTable = () => {
                     <Link to={`/portal/application/${app.id}/view`} className="text-slate-400 hover:text-aviation-600 transition-colors" title="View">
                       <Eye className="h-4 w-4" />
                     </Link>
-                    <Link to={`/portal/guidelines/${app.licence_type.toLowerCase()}`} className="text-aviation-600 hover:text-aviation-700 text-sm font-medium flex items-center gap-1" title="View Guideline">
+                    <Link to={`/portal/application/${app.id}/edit`} className="text-aviation-600 hover:text-aviation-700 text-sm font-medium flex items-center gap-1" title="Edit Application">
                       <Edit className="h-4 w-4" />
                     </Link>
                     <button className="text-slate-400 hover:text-red-600 transition-colors" title="Delete"><Trash2 className="h-4 w-4" /></button>
@@ -226,7 +226,7 @@ export default function Dashboard() {
                   title={guideline.title}
                   description={guideline.description}
                   icon={iconMap[key] || FileText}
-                  to={`/guidelines/${key.toLowerCase()}`}
+                  to={`/portal/guidelines/${key.toLowerCase()}`}
                 />
               ))}
             </div>

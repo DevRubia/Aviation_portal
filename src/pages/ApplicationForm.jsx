@@ -69,7 +69,7 @@ export default function ApplicationForm({ readOnly = false }) {
         })
         .then(data => {
           if (data.payload) {
-            setFormData(data.payload);
+            setFormData(prev => ({ ...prev, ...data.payload }));
           }
           if (data.licence_type) {
             setLicenseType(data.licence_type);
@@ -141,7 +141,7 @@ export default function ApplicationForm({ readOnly = false }) {
   if (loading) {
     return (
       <div className="min-h-full flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-aviation-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-aviation-600"></div>
       </div>
     );
   }

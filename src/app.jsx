@@ -13,7 +13,9 @@ import Profile from './pages/Profile';
 import Notifications from './pages/Notifications';
 
 import Gateway from './pages/Gateway';
+
 import AdminLogin from './pages/admin/Login';
+import PortalLogin from './pages/Login';
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
         {/* Portal Routes */}
         <Route path="/portal" element={<Layout />}>
           <Route index element={<Landing />} />
+          <Route path="login" element={<PortalLogin />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
           <Route path="notifications" element={<Notifications />} />
@@ -44,6 +47,6 @@ function App() {
 
 const container = document.getElementById('app');
 if (container) {
-    const root = createRoot(container);
-    root.render(<App />);
+  const root = createRoot(container);
+  root.render(<App />);
 }

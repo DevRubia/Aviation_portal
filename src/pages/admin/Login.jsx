@@ -20,13 +20,13 @@ export default function AdminLogin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
       // For now, just log to console. In a real app, we'd handle auth tokens here.
       console.log('Admin login attempt:', formData);
-      // navigate('/core/dashboard'); // Future step
+      navigate('/core/dashboard');
     }, 1500);
   };
 

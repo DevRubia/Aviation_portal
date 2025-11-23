@@ -2,7 +2,7 @@ import './bootstrap';
 import './app.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Layout from './components/Layout';
 import Landing from './pages/Landing';
@@ -14,7 +14,11 @@ import Notifications from './pages/Notifications';
 
 import Gateway from './pages/Gateway';
 
+import CoreLayout from './components/CoreLayout';
 import AdminLogin from './pages/admin/Login';
+import CoreDashboard from './pages/admin/Dashboard';
+import Registry from './pages/admin/Registry';
+import ApplicationDetail from './pages/admin/ApplicationDetail';
 import PortalLogin from './pages/Login';
 
 function App() {
@@ -39,7 +43,14 @@ function App() {
         </Route>
 
         {/* Admin Route Placeholder */}
-        <Route path="/core" element={<AdminLogin />} />
+        <Route path="/core/login" element={<AdminLogin />} />
+
+        <Route path="/core" element={<CoreLayout />}>
+          <Route index element={<Navigate to="/core/dashboard" replace />} />
+          <Route path="dashboard" element={<CoreDashboard />} />
+          <Route path="registry" element={<Registry />} />
+          <Route path="application/:id" element={<ApplicationDetail />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

@@ -201,10 +201,9 @@ export default function Registry() {
                                             <div className="relative" ref={openDropdown === app.id ? dropdownRef : null}>
                                                 <button
                                                     onClick={() => toggleDropdown(app.id)}
-                                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 rounded-md transition-colors"
+                                                    className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-full transition-colors"
                                                 >
-                                                    Actions
-                                                    <ChevronDown className={`h-3.5 w-3.5 transition-transform ${openDropdown === app.id ? 'rotate-180' : ''}`} />
+                                                    <MoreVertical className="h-5 w-5" />
                                                 </button>
 
                                                 {openDropdown === app.id && (

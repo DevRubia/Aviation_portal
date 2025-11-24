@@ -55,7 +55,7 @@ export default function Gateway() {
           {/* Admin Portal Card */}
           <Card
             as={Link}
-            to="/core"
+            to="/core/login"
             hoverEffect={true}
             className="group relative hover:border-slate-400"
           >

@@ -47,7 +47,7 @@ function App() {
 
         {/* Protected Core Routes */}
         <Route path="/core" element={<CoreLayout />}>
-          <Route index element={<Navigate to="/core/dashboard" replace />} />
+          <Route index element={<Navigate to="/core/login" replace />} />
           <Route path="dashboard" element={<CoreDashboard />} />
           <Route path="registry" element={<Registry />} />
           <Route path="application/:id" element={<ApplicationDetail />} />

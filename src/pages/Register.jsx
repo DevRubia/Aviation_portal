@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
     User, Building2, Mail, Lock, Phone, ArrowRight, ArrowLeft,
-    CheckCircle, Plane, FileText, MapPin, Shield, CreditCard, Globe
+    CheckCircle, Plane, FileText, MapPin, Shield, CreditCard, Globe, Briefcase
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
@@ -27,8 +27,8 @@ const StepIndicator = ({ currentStep, totalSteps, steps }) => {
                         <div key={index} className="flex flex-col items-center">
                             <div
                                 className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors duration-300 ${isCompleted || isCurrent
-                                        ? 'bg-aviation-600 text-white'
-                                        : 'bg-slate-200 text-slate-500'
+                                    ? 'bg-aviation-600 text-white'
+                                    : 'bg-slate-200 text-slate-500'
                                     }`}
                             >
                                 {isCompleted ? <CheckCircle className="h-5 w-5" /> : index + 1}
@@ -128,7 +128,7 @@ export default function PortalRegister() {
 
     // Define steps based on account type
     const individualSteps = ['Personal', 'Contact', 'Identity', 'Security'];
-    const organizationSteps = ['Organization', 'Contact', 'Representative', 'Security'];
+    const organizationSteps = ['Organization', 'Contact', 'Your Details', 'Identity', 'Security'];
 
     const steps = accountType === 'organization' ? organizationSteps : individualSteps;
     const totalSteps = steps.length;
@@ -325,21 +325,64 @@ export default function PortalRegister() {
                             </div>
                         </div>
                     );
-                case 3: // Representative
+                case 3: // Your Personal Details
                     return (
                         <div className="space-y-5 animate-fadeIn">
-                            <h3 className="text-lg font-semibold text-slate-900 border-b pb-2 mb-4">Primary Representative</h3>
-                            <p className="text-sm text-slate-500 mb-4">
-                                Enter details of the person who will manage this account. This user will have full administrative access.
-                            </p>
+                            <h3 className="text-lg font-semibold text-slate-900 border-b pb-2 mb-4">Your Personal Details</h3>
+                            <div className="bg-blue-50 p-4 rounded-md border border-blue-100 flex gap-3 mb-4">
+                                <User className="h-5 w-5 text-blue-600 shrink-0" />
+                                <p className="text-sm text-blue-700">
+                                    You are creating a <strong>personal account</strong> that represents your organization.
+                                    You can apply for personal pilot licenses and also manage your organization's compliance and operations.
+                                </p>
+                            </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <Input id="first_name" label="First Name" placeholder="Jane" required value={formData.first_name} onChange={handleChange} />
+                                <Input id="middle_name" label="Middle Name" placeholder="Optional" value={formData.middle_name} onChange={handleChange} />
                                 <Input id="last_name" label="Last Name" placeholder="Doe" required value={formData.last_name} onChange={handleChange} />
+                                <div className="space-y-1">
+                                    <label htmlFor="gender" className="block text-sm font-medium text-slate-700">Gender</label>
+                                    <select id="gender" className="block w-full rounded-md border-slate-300 shadow-sm focus:border-aviation-500 focus:ring-aviation-500 sm:text-sm py-2 px-3 border" value={formData.gender} onChange={handleChange}>
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <Input id="date_of_birth" type="date" label="Date of Birth" required value={formData.date_of_birth} onChange={handleChange} />
+                                <Input id="nationality" label="Nationality" placeholder="e.g. Kenyan" required value={formData.nationality} onChange={handleChange} icon={Globe} />
                             </div>
-                            <Input id="job_title" label="Job Title" placeholder="Operations Manager" required value={formData.job_title} onChange={handleChange} icon={User} />
+                            <Input id="job_title" label="Your Position/Role" placeholder="Operations Manager" required value={formData.job_title} onChange={handleChange} icon={Briefcase} />
                         </div>
                     );
-                case 4: // Security
+                case 4: // Identity
+                    return (
+                        <div className="space-y-5 animate-fadeIn">
+                            <h3 className="text-lg font-semibold text-slate-900 border-b pb-2 mb-4">Your Identification</h3>
+                            <div className="space-y-1">
+                                <label htmlFor="id_type" className="block text-sm font-medium text-slate-700">ID Document Type</label>
+                                <select id="id_type" className="block w-full rounded-md border-slate-300 shadow-sm focus:border-aviation-500 focus:ring-aviation-500 sm:text-sm py-2 px-3 border" value={formData.id_type} onChange={handleChange}>
+                                    <option value="national_id">National ID</option>
+                                    <option value="passport">Passport</option>
+                                    <option value="military_id">Military ID</option>
+                                </select>
+                            </div>
+
+                            <Input id="id_number" label="ID / Document Number" placeholder="12345678" required value={formData.id_number} onChange={handleChange} icon={CreditCard} />
+
+                            {formData.id_type === 'passport' && (
+                                <Input id="passport_number" label="Passport Number" placeholder="A1234567" value={formData.passport_number} onChange={handleChange} icon={Globe} />
+                            )}
+
+                            <div className="bg-blue-50 p-4 rounded-md border border-blue-100 flex gap-3">
+                                <Shield className="h-5 w-5 text-blue-600 shrink-0" />
+                                <p className="text-sm text-blue-700">
+                                    You will be asked to upload a scanned copy of your identification document after your account is created to verify your identity.
+                                </p>
+                            </div>
+                        </div>
+                    );
+                case 5: // Security
                     return (
                         <div className="space-y-5 animate-fadeIn">
                             <h3 className="text-lg font-semibold text-slate-900 border-b pb-2 mb-4">Account Security</h3>

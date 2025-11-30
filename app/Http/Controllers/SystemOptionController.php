@@ -51,9 +51,13 @@ class SystemOptionController extends Controller
             'value' => 'required|string',
             'label' => 'required|string',
             'key' => 'nullable|string',
-            'sort_order' => 'integer',
-            'is_active' => 'boolean',
+            'sort_order' => 'nullable|integer',
+            'is_active' => 'nullable|boolean',
         ]);
+
+        // Set defaults if not provided
+        $validated['sort_order'] = $validated['sort_order'] ?? 0;
+        $validated['is_active'] = $validated['is_active'] ?? true;
 
         $option = SystemOption::updateOrCreate(
             [

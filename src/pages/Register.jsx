@@ -452,7 +452,7 @@ export default function PortalRegister() {
         <div className="min-h-screen flex bg-white">
             {/* Left Side - Visual & Info */}
             <div className="hidden lg:flex lg:w-1/2 bg-slate-900 relative overflow-hidden flex-col justify-between p-12 text-white">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20"></div>
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-50"></div>
                 <div className="absolute inset-0 bg-gradient-to-br from-aviation-900/90 to-slate-900/90"></div>
 
                 <div className="relative z-10">

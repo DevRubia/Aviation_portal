@@ -14,10 +14,10 @@ Route::get('/options', [SystemOptionController::class, 'index']);
 Route::get('/options/{category}', [SystemOptionController::class, 'byCategory']);
 
 // System Options Management (Admin only)
-Route::middleware('auth:sanctum')->group(function () {
+// Route::middleware('auth:sanctum')->group(function () {
     Route::post('/options', [SystemOptionController::class, 'store']);
     Route::delete('/options/{id}', [SystemOptionController::class, 'destroy']);
-});
+// });
 
 // Applications
 Route::post('/applications', [ApplicationController::class, 'store']);

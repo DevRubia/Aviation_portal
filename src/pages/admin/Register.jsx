@@ -200,7 +200,7 @@ export default function AdminRegister() {
         <div className="min-h-screen flex bg-slate-50">
             {/* Left Side - Visual & Info */}
             <div className="hidden lg:flex lg:w-5/12 bg-slate-800 relative overflow-hidden flex-col justify-between p-12 text-white">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-10"></div>
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-50"></div>
                 <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 to-slate-800/95"></div>
 
                 <div className="relative z-10">

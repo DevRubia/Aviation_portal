@@ -25,6 +25,7 @@ import CoreDashboard from './pages/admin/Dashboard';
 import Registry from './pages/admin/Registry';
 import ApplicationDetail from './pages/admin/ApplicationDetail';
 import AdminRegister from './pages/admin/Register';
+import SystemConfigurations from './pages/admin/SystemConfigurations';
 
 // Gateway (entry point)
 import Gateway from './pages/Gateway';
@@ -64,6 +65,7 @@ function App() {
           <Route index element={<Navigate to="/core/login" replace />} />
           <Route path="dashboard" element={<CoreDashboard />} />
           <Route path="registry" element={<Registry />} />
+          <Route path="configurations" element={<SystemConfigurations />} />
           <Route path="application/:id" element={<ApplicationDetail />} />
         </Route>
       </Routes>

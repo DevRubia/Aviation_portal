@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { ShieldCheck, Home, FileText, Bell, User, Menu, X, LogOut } from 'lucide-react';
+import { ShieldCheck, Home, FileText, Bell, User, Menu, X, LogOut, Settings } from 'lucide-react';
 
 export default function CoreLayout() {
     const location = useLocation();
@@ -11,6 +11,7 @@ export default function CoreLayout() {
     const navigation = [
         { name: 'Home', href: '/core/dashboard', icon: Home },
         { name: 'Registry', href: '/core/registry', icon: FileText },
+        { name: 'Configurations', href: '/core/configurations', icon: Settings },
     ];
 
     return (

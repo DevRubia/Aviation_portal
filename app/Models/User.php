@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'organization_id',
         'first_name',
         'middle_name',
         'last_name',
@@ -101,5 +102,13 @@ class User extends Authenticatable
             'archived_at' => 'datetime',
             'password_changed_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Get the organization that the user belongs to.
+     */
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
     }
 }

@@ -29,7 +29,7 @@ export default function ApplicationGuideline() {
             <CheckCircle className="h-6 w-6 text-green-600" />
             Prerequisites & Requirements
           </h3>
-          
+
           <ul className="space-y-4 mb-10">
             {currentGuideline.requirements.map((req, index) => (
               <li key={index} className="flex items-start gap-3 bg-slate-50 p-4 rounded-lg border border-slate-100">
@@ -52,8 +52,8 @@ export default function ApplicationGuideline() {
           </div>
 
           <div className="flex justify-end gap-4 pt-6 border-t border-slate-200">
-            <Link 
-              to="/dashboard"
+            <Link
+              to="/portal/dashboard"
               className="px-6 py-3 rounded-lg text-slate-600 font-medium hover:bg-slate-100 transition-colors"
             >
               Cancel

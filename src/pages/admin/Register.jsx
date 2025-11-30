@@ -6,6 +6,8 @@ import {
 } from 'lucide-react';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
+import Select from '../../components/ui/Select';
+import { useSystemOptions, getOptionsByCategory } from '../../hooks/useSystemOptions';
 
 // Step Indicator Component (Reused for consistency)
 const StepIndicator = ({ currentStep, totalSteps, steps }) => {
@@ -26,8 +28,8 @@ const StepIndicator = ({ currentStep, totalSteps, steps }) => {
                         <div key={index} className="flex flex-col items-center">
                             <div
                                 className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors duration-300 ${isCompleted || isCurrent
-                                        ? 'bg-blue-600 text-white'
-                                        : 'bg-slate-200 text-slate-500'
+                                    ? 'bg-blue-600 text-white'
+                                    : 'bg-slate-200 text-slate-500'
                                     }`}
                             >
                                 {isCompleted ? <CheckCircle className="h-5 w-5" /> : index + 1}
@@ -47,6 +49,9 @@ export default function AdminRegister() {
     const navigate = useNavigate();
     const [currentStep, setCurrentStep] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
+
+    // Fetch system options
+    const { options: systemOptions, loading: optionsLoading } = useSystemOptions();
 
     const [formData, setFormData] = useState({
         // Identity
@@ -118,7 +123,16 @@ export default function AdminRegister() {
                         <h3 className="text-lg font-semibold text-slate-900 border-b pb-2 mb-4">Employment Details</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <Input id="employee_id" label="Employee ID" placeholder="CAA-0000" required value={formData.employee_id} onChange={handleChange} icon={Briefcase} />
-                            <Input id="department" label="Department" placeholder="e.g. Licensing" required value={formData.department} onChange={handleChange} icon={Building2} />
+                            <Select
+                                id="department"
+                                label="Department"
+                                options={getOptionsByCategory(systemOptions, 'caa_department')}
+                                value={formData.department}
+                                onChange={handleChange}
+                                placeholder="Select Department"
+                                required
+                                disabled={optionsLoading}
+                            />
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <Input id="job_title" label="Job Title" placeholder="e.g. Senior Inspector" required value={formData.job_title} onChange={handleChange} icon={Briefcase} />

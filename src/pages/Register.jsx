@@ -6,7 +6,9 @@ import {
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
+import Select from '../components/ui/Select';
 import Card from '../components/ui/Card';
+import { useSystemOptions, getOptionsByCategory } from '../hooks/useSystemOptions';
 
 // Step Indicator Component
 const StepIndicator = ({ currentStep, totalSteps, steps }) => {
@@ -49,6 +51,9 @@ export default function PortalRegister() {
     const [accountType, setAccountType] = useState(null); // 'individual' or 'organization'
     const [currentStep, setCurrentStep] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
+
+    // Fetch system options
+    const { options: systemOptions, loading: optionsLoading } = useSystemOptions();
 
     // Unified form state
     const [formData, setFormData] = useState({
@@ -194,17 +199,26 @@ export default function PortalRegister() {
                                 <Input id="first_name" label="First Name" placeholder="John" required value={formData.first_name} onChange={handleChange} />
                                 <Input id="middle_name" label="Middle Name" placeholder="Optional" value={formData.middle_name} onChange={handleChange} />
                                 <Input id="last_name" label="Last Name" placeholder="Doe" required value={formData.last_name} onChange={handleChange} />
-                                <div className="space-y-1">
-                                    <label htmlFor="gender" className="block text-sm font-medium text-slate-700">Gender</label>
-                                    <select id="gender" className="block w-full rounded-md border-slate-300 shadow-sm focus:border-aviation-500 focus:ring-aviation-500 sm:text-sm py-2 px-3 border" value={formData.gender} onChange={handleChange}>
-                                        <option value="">Select Gender</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
+                                <Select
+                                    id="gender"
+                                    label="Gender"
+                                    options={getOptionsByCategory(systemOptions, 'gender')}
+                                    value={formData.gender}
+                                    onChange={handleChange}
+                                    placeholder="Select Gender"
+                                    disabled={optionsLoading}
+                                />
                                 <Input id="date_of_birth" type="date" label="Date of Birth" required value={formData.date_of_birth} onChange={handleChange} />
-                                <Input id="nationality" label="Nationality" placeholder="e.g. Kenyan" required value={formData.nationality} onChange={handleChange} icon={Globe} />
+                                <Select
+                                    id="nationality"
+                                    label="Nationality"
+                                    options={getOptionsByCategory(systemOptions, 'nationality')}
+                                    value={formData.nationality}
+                                    onChange={handleChange}
+                                    placeholder="Select Nationality"
+                                    required
+                                    disabled={optionsLoading}
+                                />
                             </div>
                         </div>
                     );
@@ -220,7 +234,16 @@ export default function PortalRegister() {
                             </div>
                             <div className="grid grid-cols-2 gap-5">
                                 <Input id="city" label="City" placeholder="Nairobi" required value={formData.city} onChange={handleChange} />
-                                <Input id="country" label="Country of Residence" placeholder="Kenya" required value={formData.country} onChange={handleChange} />
+                                <Select
+                                    id="country"
+                                    label="Country of Residence"
+                                    options={getOptionsByCategory(systemOptions, 'country')}
+                                    value={formData.country}
+                                    onChange={handleChange}
+                                    placeholder="Select Country"
+                                    required
+                                    disabled={optionsLoading}
+                                />
                             </div>
                         </div>
                     );
@@ -228,14 +251,16 @@ export default function PortalRegister() {
                     return (
                         <div className="space-y-5 animate-fadeIn">
                             <h3 className="text-lg font-semibold text-slate-900 border-b pb-2 mb-4">Identification</h3>
-                            <div className="space-y-1">
-                                <label htmlFor="id_type" className="block text-sm font-medium text-slate-700">ID Document Type</label>
-                                <select id="id_type" className="block w-full rounded-md border-slate-300 shadow-sm focus:border-aviation-500 focus:ring-aviation-500 sm:text-sm py-2 px-3 border" value={formData.id_type} onChange={handleChange}>
-                                    <option value="national_id">National ID</option>
-                                    <option value="passport">Passport</option>
-                                    <option value="military_id">Military ID</option>
-                                </select>
-                            </div>
+                            <Select
+                                id="id_type"
+                                label="ID Document Type"
+                                options={getOptionsByCategory(systemOptions, 'document_type')}
+                                value={formData.id_type}
+                                onChange={handleChange}
+                                placeholder="Select Document Type"
+                                required
+                                disabled={optionsLoading}
+                            />
 
                             <Input id="id_number" label="ID / Document Number" placeholder="12345678" required value={formData.id_number} onChange={handleChange} icon={CreditCard} />
 
@@ -293,16 +318,16 @@ export default function PortalRegister() {
                             <Input id="org_legal_name" label="Legal Name (if different)" placeholder="SkyHigh Aviation Limited" value={formData.org_legal_name} onChange={handleChange} />
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                <div className="space-y-1">
-                                    <label htmlFor="org_type" className="block text-sm font-medium text-slate-700">Organization Type</label>
-                                    <select id="org_type" className="block w-full rounded-md border-slate-300 shadow-sm focus:border-aviation-500 focus:ring-aviation-500 sm:text-sm py-2 px-3 border" value={formData.org_type} onChange={handleChange}>
-                                        <option value="">Select Type</option>
-                                        <option value="airline">Airline / Operator</option>
-                                        <option value="ato">Approved Training Org (ATO)</option>
-                                        <option value="amo">Approved Maintenance Org (AMO)</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
+                                <Select
+                                    id="org_type"
+                                    label="Organization Type"
+                                    options={getOptionsByCategory(systemOptions, 'organization_type')}
+                                    value={formData.org_type}
+                                    onChange={handleChange}
+                                    placeholder="Select Type"
+                                    required
+                                    disabled={optionsLoading}
+                                />
                                 <Input id="org_registration_number" label="Registration Number" placeholder="REG-123456" required value={formData.org_registration_number} onChange={handleChange} icon={FileText} />
                             </div>
                             <Input id="org_tax_id" label="Tax ID / KRA PIN" placeholder="P000000000A" required value={formData.org_tax_id} onChange={handleChange} />
@@ -340,17 +365,26 @@ export default function PortalRegister() {
                                 <Input id="first_name" label="First Name" placeholder="Jane" required value={formData.first_name} onChange={handleChange} />
                                 <Input id="middle_name" label="Middle Name" placeholder="Optional" value={formData.middle_name} onChange={handleChange} />
                                 <Input id="last_name" label="Last Name" placeholder="Doe" required value={formData.last_name} onChange={handleChange} />
-                                <div className="space-y-1">
-                                    <label htmlFor="gender" className="block text-sm font-medium text-slate-700">Gender</label>
-                                    <select id="gender" className="block w-full rounded-md border-slate-300 shadow-sm focus:border-aviation-500 focus:ring-aviation-500 sm:text-sm py-2 px-3 border" value={formData.gender} onChange={handleChange}>
-                                        <option value="">Select Gender</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
+                                <Select
+                                    id="gender"
+                                    label="Gender"
+                                    options={getOptionsByCategory(systemOptions, 'gender')}
+                                    value={formData.gender}
+                                    onChange={handleChange}
+                                    placeholder="Select Gender"
+                                    disabled={optionsLoading}
+                                />
                                 <Input id="date_of_birth" type="date" label="Date of Birth" required value={formData.date_of_birth} onChange={handleChange} />
-                                <Input id="nationality" label="Nationality" placeholder="e.g. Kenyan" required value={formData.nationality} onChange={handleChange} icon={Globe} />
+                                <Select
+                                    id="nationality"
+                                    label="Nationality"
+                                    options={getOptionsByCategory(systemOptions, 'nationality')}
+                                    value={formData.nationality}
+                                    onChange={handleChange}
+                                    placeholder="Select Nationality"
+                                    required
+                                    disabled={optionsLoading}
+                                />
                             </div>
                             <Input id="job_title" label="Your Position/Role" placeholder="Operations Manager" required value={formData.job_title} onChange={handleChange} icon={Briefcase} />
                         </div>

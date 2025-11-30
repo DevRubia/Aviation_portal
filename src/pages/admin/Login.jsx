@@ -114,10 +114,20 @@ export default function AdminLogin() {
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-white text-slate-500">
-                  Authorized Access Only
+                  New Officer?
                 </span>
               </div>
             </div>
+
+            <div className="mt-6">
+              <button
+                onClick={() => navigate('/core/register')}
+                className="w-full flex justify-center py-2 px-4 border border-slate-300 rounded-md shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 transition-colors"
+              >
+                Request Access
+              </button>
+            </div>
+
             <div className="mt-6 text-center text-xs text-slate-400">
               <p>Unauthorized access is a criminal offense under the Computer Misuse Act 1990.</p>
               <p className="mt-1">IP Address Logged: 192.168.x.x</p>

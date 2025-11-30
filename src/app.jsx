@@ -37,11 +37,15 @@ function App() {
         {/* Gateway route – entry point */}
         <Route path="/" element={<Gateway />} />
 
-        {/* Pilot portal routes */}
+        {/* Portal Auth Routes (Standalone) */}
+        <Route path="/portal/login" element={<PortalLogin />} />
+        <Route path="/portal/register" element={<Register />} />
+
+        {/* Public Landing (Standalone) */}
+        <Route path="/portal" element={<Landing />} />
+
+        {/* Portal Routes - Authenticated pilot portal */}
         <Route path="/portal" element={<Layout />}>
-          <Route index element={<Landing />} />
-          <Route path="login" element={<PortalLogin />} />
-          <Route path="register" element={<Register />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
           <Route path="notifications" element={<Notifications />} />
@@ -51,8 +55,9 @@ function App() {
           <Route path="application/:id/view" element={<ApplicationForm readOnly={true} />} />
         </Route>
 
-        {/* Admin authentication */}
+        {/* Admin Auth Routes (Standalone) */}
         <Route path="/core/login" element={<AdminLogin />} />
+        <Route path="/core/register" element={<AdminRegister />} />
 
         {/* Protected admin routes */}
         <Route path="/core" element={<CoreLayout />}>
@@ -60,7 +65,6 @@ function App() {
           <Route path="dashboard" element={<CoreDashboard />} />
           <Route path="registry" element={<Registry />} />
           <Route path="application/:id" element={<ApplicationDetail />} />
-          <Route path="register" element={<AdminRegister />} />
         </Route>
       </Routes>
     </BrowserRouter>
